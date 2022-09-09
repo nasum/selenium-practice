@@ -7,6 +7,13 @@ const browser = await remote({
   path: "/",
   capabilities: {
     browserName: "chrome",
+    "goog:chromeOptions": {
+      args: [
+        "--no-sandbox",
+        "--enable-logging=stderr",
+        "--user-data-dir=/tmp"
+      ] 
+    }
   },
   logLevel: "info",
 });
@@ -17,9 +24,9 @@ const elem = await browser.$(
   "#app > div.l-wrapper > div > ul > li:nth-child(1) > a"
 );
 
-await browser.saveScreenshot("./schreenshots/1.png");
+await browser.saveScreenshot("./screenshots/1.png");
 
 await elem.click();
 
-await browser.saveScreenshot("./schreenshots/2.png");
+await browser.saveScreenshot("./screenshots/2.png");
 await browser.deleteSession();
